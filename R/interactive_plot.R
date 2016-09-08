@@ -179,7 +179,7 @@ interactive_plot <- function(result, labels_candidate_pts = NULL){
       output$p3_pt3 <- renderUI({
         if(  input$p3_pt2=="NA" || length(input$p3_pt2) < 1 ){
           conditionalPanel(
-            condition = "input.p3_checkbox == 3 && input.p3_pt1 > 1",
+            condition = "input.p3_checkbox == 3 && input.p3_pt1 > 0",
             tags$style(type='text/css', ".selectize-dropdown { font-size: 15px;  line-height: 15px; } .selectize-input { font-size: 15px; line-height: 15px;  padding: 15px; }"),
             selectInput("p3_pt3", label = "for 3rd point",
                         choices = c("NA"),
@@ -191,7 +191,7 @@ interactive_plot <- function(result, labels_candidate_pts = NULL){
           vec.ch2 <- c("NA", vec.ch2)
 
           conditionalPanel(
-            condition = "input.p3_checkbox == 3 && input.p3_pt1 > 1",
+            condition = "input.p3_checkbox == 3 && input.p3_pt1 > 0",
             tags$style(type='text/css', ".selectize-dropdown { font-size: 15px;  line-height: 15px; } .selectize-input { font-size: 15px; line-height: 15px;  padding: 15px; }"),
             selectInput("p3_pt3", label = "for 3rd point",
                         choices =  vec.ch2,
