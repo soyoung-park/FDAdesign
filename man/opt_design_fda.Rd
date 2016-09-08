@@ -7,35 +7,35 @@
 opt_design_fda(p = 2, Phi, lambda, B = NULL, sigma2 = 10^-14)
 }
 \arguments{
-\item{p}{number of optimal sampling points.}
+\item{p}{number of optimal sampling points to be selected}
 
-\item{Phi}{d by L matrix of estimate eigenfunctions evaluated at d candidate points; L is number of PCs.}
+\item{Phi}{d by L matrix of eigenfunctions evaluated at d candidate points; L is number of PCs.}
 
-\item{lambda}{L estimated eigenvalues}
+\item{lambda}{eigenvalues; a vector of length L}
 
-\item{B}{design criterion matrix (e.g. for recovering curves, B = diag(L); a square metrix with dim = L}
+\item{B}{design criterion matrix (e.g. for recovering curves, B = diag(L); a square matrix with dim = L}
 
-\item{sigma2}{estimated measurement error variance associated with functional object.}
+\item{sigma2}{measurement error variance associated with functional object.}
 }
 \value{
-index_opt index of d candidate points that corresponds to the selected optimal points.
+index_opt   index of d candidate points that corresponds to the selected optimal points.
 
-obj_opt prediction error with p selected optimal points; i.e. objective function evaluated at p selected points.
+obj_opt   prediction error with the p selected optimal points; i.e. objective function evaluated at the p selected optimal points.
 
-obj_opt_limit prediction error with d candidate points (smallest prediction error).
+obj_opt_limit   prediction error with d candidate points (smallest prediction error).
 
-error.level obj_opt/obj_opt_limit; relative measure of how large prediction error with p selected optimal points is to that with d candidate points.
+error.level   obj_opt/obj_opt_limit; relative measure of how large prediction error with the p selected optimal points is to that with d candidate points.
 
-index_all_comb all possible combinations of p points from the candidate set; p by (d choose p) matrix
+index_all_comb   all possible combinations of p points from the candidate set; p by (d choose p) matrix
 
-obj_eval_all objective function evaluated at \code{index_all_comb}.
+obj_eval_all   objective function evaluated at \code{index_all_comb}.
 
-INPUT input of \code{opt_design_fda} provided by a user.
+INPUT   input of \code{opt_design_fda} provided as input.
 }
 \description{
-Determines optimal sampling design for functional data under Functional Principal Component Analysis (FPCA)
+Selects optimal sampling points for functional data under Functional Principal Component Analysis (FPCA)
 and Functional Linear Model (FLM) frameworks. Unified objective function is used to determine optimal points.
-Joint optimal design points can also be obtained with appropriately defined deseign criterion matrix, B.
+Joint optimal design points can also be obtained with appropriately defined design criterion matrix, B.
 }
 \examples{
 rm(list=ls())

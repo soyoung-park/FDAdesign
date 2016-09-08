@@ -8,31 +8,31 @@ selection_p(p_vec = 1:5, threshold = 5, Phi, lambda, B = NULL,
   sigma2 = 10^-14)
 }
 \arguments{
-\item{p_vec}{a vector of p's to consider to select p}
+\item{p_vec}{a vector of p's}
 
-\item{threshold}{user-specified threshold for selecting p}
+\item{threshold}{user-specified threshold h for selecting p (relative error levels)}
 
-\item{Phi}{d by L matrix of estimate eigenfunctions evaluated at d candidate points; L is number of PCs.}
+\item{Phi}{d by L matrix of eigenfunctions evaluated at d candidate points; L is number of PCs.}
 
-\item{lambda}{L estimated eigenvalues}
+\item{lambda}{eigenvalues; a vector of length L}
 
-\item{B}{design criterion matrix (e.g. for recovering curves, B = diag(L); a square metrix with dim = L}
+\item{B}{design criterion matrix (e.g. for recovering curves, B = diag(L); a square matrix with dim = L}
 
-\item{sigma2}{estimated measurement error variance associated with functional object.}
+\item{sigma2}{measurement error variance associated with functional object.}
 }
 \value{
-plot plot of error levels corresponding to \code{p_vec}.
+plot  plot of error levels corresponding to \code{p_vec}.
 
-p.sel number of optimal points, p, determined with given threshold.
+p.sel  number of optimal points, p, determined with given threshold.
 
-opt.sel result of \link{opt_design_fda} corresponding to the selected p, \code{p.sel}.
+opt.sel  result of \link{opt_design_fda} corresponding to the selected p, \code{p.sel}.
 
-opt_result result of \link{opt_design_fda} corresponding to \code{p_vec}.
+opt_result results of \link{opt_design_fda} corresponding to \code{p_vec}.
 
-INPUT input of \code{selection_p} provided by a user.
+INPUT input of \code{selection_p} provided as input.
 }
 \description{
-Selects number of optimal points, p, from a vector of p's (\code{p_vec}) given by user.
+Selects number of optimal points, p, from a vector of p's (\code{p_vec}) given as input.
 This function also returns results of the \link{opt_design_fda} function for given p's (\code{p_vec}).
 }
 \examples{

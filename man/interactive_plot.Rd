@@ -7,17 +7,17 @@
 interactive_plot(result, labels_candidate_pts = NULL)
 }
 \arguments{
-\item{result}{list of results of \code{opt_design_fda} for p = 1, 2, 4; i.e. selection_p(p_vec = 1:3,...)}
+\item{result}{list of results of \code{opt_design_fda} for p = 1, 2, 3; i.e. selection_p(p_vec = 1:3,...)}
 
-\item{labels_candidate_pts}{candidate points for x-label in interactive plots;
+\item{labels_candidate_pts}{candidate points for x-label on interactive plots;
        default = NULL is equivalent to 1:number of candidate points.}
 }
 \value{
-interactive plots illustrating objective functions for p = 1, 2, 3.
+user interface illustrating objective functions for p = 1, 2, 3.
 }
 \description{
-Produces an interactive plot illustrating objective functions of determining optimal sampling points
-for p = 1, 2, and 3.
+Produces interactive graphics to visualize objective functions for selecting
+optimal sampling points for p = 1, 2, and 3.
 }
 \examples{
 # see example for opt_design_fda() function

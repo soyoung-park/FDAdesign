@@ -1,13 +1,14 @@
 #' Optimal Sampling Design for Functional Data Analysis - interactive plots 
 #'
-#' Produces an interactive plot illustrating objective functions of determining optimal sampling points
-#' for p = 1, 2, and 3.
+#' Produces interactive graphics to visualize objective functions for selecting
+#' optimal sampling points for p = 1, 2, and 3.
+#' 
 #'
-#' @param result list of results of \code{opt_design_fda} for p = 1, 2, 4; i.e. selection_p(p_vec = 1:3,...)
-#' @param labels_candidate_pts candidate points for x-label in interactive plots; 
+#' @param result   list of results of \code{opt_design_fda} for p = 1, 2, 3; i.e. selection_p(p_vec = 1:3,...)
+#' @param labels_candidate_pts   candidate points for x-label on interactive plots; 
 #'        default = NULL is equivalent to 1:number of candidate points.
 #' 
-#' @return interactive plots illustrating objective functions for p = 1, 2, 3.
+#' @return user interface illustrating objective functions for p = 1, 2, 3.
 #' @examples
 #' # see example for opt_design_fda() function
 #' @author So Young Park \email{spark13@@ncsu.edu},

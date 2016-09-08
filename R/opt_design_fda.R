@@ -1,22 +1,22 @@
 #' Optimal Sampling Design for Functional Data Analysis 
 #'
-#' Determines optimal sampling design for functional data under Functional Principal Component Analysis (FPCA)
+#' Selects optimal sampling points for functional data under Functional Principal Component Analysis (FPCA)
 #' and Functional Linear Model (FLM) frameworks. Unified objective function is used to determine optimal points.
-#' Joint optimal design points can also be obtained with appropriately defined deseign criterion matrix, B.
+#' Joint optimal design points can also be obtained with appropriately defined design criterion matrix, B.
 #'
-#' @param p number of optimal sampling points. 
-#' @param Phi  d by L matrix of estimate eigenfunctions evaluated at d candidate points; L is number of PCs.
-#' @param lambda  L estimated eigenvalues
-#' @param B design criterion matrix (e.g. for recovering curves, B = diag(L); a square metrix with dim = L
-#' @param sigma2 estimated measurement error variance associated with functional object.
+#' @param p   number of optimal sampling points to be selected
+#' @param Phi    d by L matrix of eigenfunctions evaluated at d candidate points; L is number of PCs.
+#' @param lambda  eigenvalues; a vector of length L
+#' @param B  design criterion matrix (e.g. for recovering curves, B = diag(L); a square matrix with dim = L
+#' @param sigma2  measurement error variance associated with functional object.
 #' 
-#' @return index_opt index of d candidate points that corresponds to the selected optimal points.
-#' @return obj_opt prediction error with p selected optimal points; i.e. objective function evaluated at p selected points.
-#' @return obj_opt_limit prediction error with d candidate points (smallest prediction error).
-#' @return error.level obj_opt/obj_opt_limit; relative measure of how large prediction error with p selected optimal points is to that with d candidate points.
-#' @return index_all_comb all possible combinations of p points from the candidate set; p by (d choose p) matrix
-#' @return obj_eval_all objective function evaluated at \code{index_all_comb}.
-#' @return INPUT input of \code{opt_design_fda} provided by a user.
+#' @return index_opt   index of d candidate points that corresponds to the selected optimal points.
+#' @return obj_opt   prediction error with the p selected optimal points; i.e. objective function evaluated at the p selected optimal points.
+#' @return obj_opt_limit   prediction error with d candidate points (smallest prediction error).
+#' @return error.level   obj_opt/obj_opt_limit; relative measure of how large prediction error with the p selected optimal points is to that with d candidate points.
+#' @return index_all_comb   all possible combinations of p points from the candidate set; p by (d choose p) matrix
+#' @return obj_eval_all   objective function evaluated at \code{index_all_comb}.
+#' @return INPUT   input of \code{opt_design_fda} provided as input.
 #' 
 #' @examples
 #' rm(list=ls())

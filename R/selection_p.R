@@ -1,20 +1,20 @@
 #' Optimal Sampling Design for Functional Data Analysis - selection of number of optimal points
 #'
-#' Selects number of optimal points, p, from a vector of p's (\code{p_vec}) given by user. 
+#' Selects number of optimal points, p, from a vector of p's (\code{p_vec}) given as input. 
 #' This function also returns results of the \link{opt_design_fda} function for given p's (\code{p_vec}).
 #'
-#' @param p_vec a vector of p's to consider to select p
-#' @param threshold user-specified threshold for selecting p
-#' @param Phi  d by L matrix of estimate eigenfunctions evaluated at d candidate points; L is number of PCs.
-#' @param lambda  L estimated eigenvalues
-#' @param B design criterion matrix (e.g. for recovering curves, B = diag(L); a square metrix with dim = L
-#' @param sigma2 estimated measurement error variance associated with functional object.
+#' @param p_vec   a vector of p's 
+#' @param threshold   user-specified threshold h for selecting p (relative error levels)
+#' @param Phi   d by L matrix of eigenfunctions evaluated at d candidate points; L is number of PCs.
+#' @param lambda   eigenvalues; a vector of length L
+#' @param B   design criterion matrix (e.g. for recovering curves, B = diag(L); a square matrix with dim = L
+#' @param sigma2   measurement error variance associated with functional object.
 #' 
-#' @return plot plot of error levels corresponding to \code{p_vec}.
-#' @return p.sel number of optimal points, p, determined with given threshold.
-#' @return opt.sel result of \link{opt_design_fda} corresponding to the selected p, \code{p.sel}.
-#' @return opt_result result of \link{opt_design_fda} corresponding to \code{p_vec}.
-#' @return INPUT input of \code{selection_p} provided by a user.
+#' @return plot  plot of error levels corresponding to \code{p_vec}.
+#' @return p.sel  number of optimal points, p, determined with given threshold.
+#' @return opt.sel  result of \link{opt_design_fda} corresponding to the selected p, \code{p.sel}.
+#' @return opt_result results of \link{opt_design_fda} corresponding to \code{p_vec}.
+#' @return INPUT input of \code{selection_p} provided as input.
 #' 
 #' @examples 
 #' # see example for opt_design_fda function
