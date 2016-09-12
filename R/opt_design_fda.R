@@ -19,7 +19,7 @@
 #' @return INPUT   input of \code{opt_design_fda} provided as input.
 #' 
 #' @examples
-#' rm(list=ls())
+#' \dontrun{rm(list=ls())
 #' library(face)
 #' # define true eigen-components and npc
 #' K = 5
@@ -123,7 +123,7 @@
 #' beta.hat <- t(coef$value)%*% Phi.hat / T0
 #' beta.hat <- matrix(beta.hat, nrow=length(beta.hat))
 #' 
-#' optT.hat <- opt_fda_search(p=p, B = beta.hat%*%t(beta.hat),
+#' optT.hat <- opt_design_fda(p=p, B = beta.hat%*%t(beta.hat),
 #'                            Phi=Phi.hat, lambda=lambda.hat, sigma2=sigma2.hat)
 #' 
 #' # selected optimal sampling points
@@ -175,10 +175,10 @@
 #' optT.hat.first.three <- selection_p(p_vec = 1:3, threshold = 5, B = B,
 #'                                  Phi=Phi.hat, lambda=lambda.hat, sigma2=sigma2.hat)
 #' interactive_plot(optT.hat.first.three)
+#' }
 #' @author So Young Park \email{spark13@@ncsu.edu},
 #' Luo Xiao \email{lxiao5@@ncsu.edu},
 #' Ana-Maria Staicu \email{astaicu@@ncsu.edu}
-#' @references \url{}
 #' @seealso \code{\link{opt_design_fda}} /
 #'          \code{\link{selection_p}} /
 #'          \code{\link{interactive_plot}}

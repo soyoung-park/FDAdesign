@@ -14,7 +14,6 @@
 #' @author So Young Park \email{spark13@@ncsu.edu},
 #' Luo Xiao \email{lxiao5@@ncsu.edu},
 #' Ana-Maria Staicu \email{astaicu@@ncsu.edu}
-#' @references \url{}
 #' @seealso \code{\link{opt_design_fda}} /
 #' \code{\link{selection_p}} /
 #' \code{\link{interactive_plot}}
@@ -23,8 +22,8 @@
 #' @export
 interactive_plot <- function(result, labels_candidate_pts = NULL){
 
-  require(shiny)
-  require(ggplot2)
+  #require(shiny)
+  #require(ggplot2)
  
   opt_result <- result$opt_result
   if(is.null(labels_candidate_pts)) labels_candidate_pts <- c(opt_result[[1]]$index_all_comb)
@@ -38,6 +37,13 @@ interactive_plot <- function(result, labels_candidate_pts = NULL){
   }
   Phi <- result$INPUT$Phi
   vec.choice <- labels_candidate_pts
+  
+  x1 <- NULL
+  y <- NULL
+  x <- NULL
+  x2 <- NULL
+  x3 <- NULL
+  
   ####################################################
   #  App 
   ####################################################
@@ -138,9 +144,9 @@ interactive_plot <- function(result, labels_candidate_pts = NULL){
     #  Server 
     ####################################################
     server = function(input, output){
-      range_y0 <<-  range(unlist(result_obj_eval))
-      range_y <<- c(0, range_y0[2])
-      tick <<- seq(1, nrow(Phi), by = 2)
+      range_y0 <-  range(unlist(result_obj_eval))
+      range_y <- c(0, range_y0[2])
+      tick <- seq(1, nrow(Phi), by = 2)
       
       # === render UI === #
       

@@ -21,7 +21,6 @@
 #' @author So Young Park \email{spark13@@ncsu.edu},
 #' Luo Xiao \email{lxiao5@@ncsu.edu},
 #' Ana-Maria Staicu \email{astaicu@@ncsu.edu}
-#' @references \url{}
 #' @seealso \code{\link{opt_design_fda}} / \code{\link{selection_p}} / \code{\link{interactive_plot}}
 #' @import shiny
 #' @import ggplot2
