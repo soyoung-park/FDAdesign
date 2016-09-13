@@ -124,12 +124,14 @@ optT.hat$obj_opt   # [1] 2.142494
 optT.hat$obj_opt/optT.hat$obj_opt_limit; optT.hat$error.level # [1] 4.830735
 
 # example of selection_p() function
-optT.hat.all <- selection_p(p_vec = c(1,3,4), threshold = 5, Phi=Phi.hat, lambda=lambda.hat, sigma2=sigma2.hat)
+optT.hat.all <- selection_p(p_vec = c(1,3,4), threshold = 5, Phi=Phi.hat,
+                             lambda=lambda.hat, sigma2=sigma2.hat)
 optT.hat.all$p.sel #  [1] 3
 optT.hat.all$opt.sel[[1]]$index_opt  # [1]  5 14 18 (same as optT.hat$index_opt)
 
 # example of interactive_plot() function
-optT.hat.first.three <- selection_p(p_vec = 1:3, threshold = 5, Phi=Phi.hat, lambda=lambda.hat, sigma2=sigma2.hat)
+optT.hat.first.three <- selection_p(p_vec = 1:3, threshold = 5, Phi=Phi.hat, 
+                                     lambda=lambda.hat, sigma2=sigma2.hat)
 interactive_plot(optT.hat.first.three)
 
 #===============================================================
