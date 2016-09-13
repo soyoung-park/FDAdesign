@@ -1,6 +1,6 @@
 Package: FDAdesign
 Title: Optimal Sampling Design for Functional Data
-Version: 0.0.2
+Version: 0.0.1
 Author: So Young Park, Luo Xiao and Ana-Maria Staicu
 Maintainer: So Young Park <spark13@ncsu.edu>
 Description: Joint optimal sampling design for functional data under both functional principal component analysis (FPCA) and functional linear model (FLM) frameworks.
