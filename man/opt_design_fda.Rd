@@ -111,7 +111,8 @@ p = 3
 optT.hat <- opt_design_fda(p=p, Phi=Phi.hat, lambda=lambda.hat, sigma2=sigma2.hat)
 
 names(optT.hat)
-# [1] "index_opt"      "obj_opt"        "obj_opt_limit"  "error.level"    "index_all_comb" "obj_eval_all"   "INPUT"
+# [1] "index_opt"      "obj_opt"        "obj_opt_limit"  
+#  "error.level"    "index_all_comb" "obj_eval_all"   "INPUT"
 
 # selected optimal sampling points
 optT.hat$index_opt  # [1]  5 14 18
