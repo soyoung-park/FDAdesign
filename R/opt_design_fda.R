@@ -21,7 +21,7 @@
 #' @examples
 #' \dontrun{rm(list=ls())
 #' library(face)
-#' # define true eigen-components and npc
+#' #define true eigen-components and npc
 #' K = 5
 #' efn_sin <- function(k,t){return(sqrt(2)*sin((k+1)*pi*t))}
 #' efn_cos <- function(k,t){return(sqrt(2)*cos((k)*pi*t))}
@@ -37,7 +37,7 @@
 #' sigma2.y <- 2^2
 #' # set true basis coefficients
 #' beta <- matrix(c(4, 2.5, 1.5, 1, 0.5))
-#' 
+#'
 #' #===============================================================
 #' # Function Data Generation (irregular / sparse)
 #' #===============================================================
@@ -72,47 +72,41 @@
 #' }
 #' error.y <- rnorm(n = n, mean = 0, sd = sqrt(sigma2.y))
 #' scalar.y <- scr.true%*%beta + error.y
-#' 
+#'
 #' myFuncDat <- data.frame(argvals=tt.vec, subj=i.vec, y=Y1.vec)
-#' 
+#'
 #' #===============================================================
 #' # Functional Principal Component Analysis (FPCA) Case 
 #' #===============================================================
-#' 
+#'
 #' T0 <- 21
 #' t.eq <- seq(0,1,length.out=T0)
 #' fit <- face.sparse(data = myFuncDat, knots = 10, 
-#'                    argvals.new=t.eq, newdata = myFuncDat,
-#'                    calculate.scores=TRUE, pve = 0.95)
+#'                   argvals.new=t.eq, newdata = myFuncDat,
+#'                   calculate.scores=TRUE, pve = 0.95)
 #' Phi.hat <- fit$eigenfunctions
 #' lambda.hat <- fit$eigenvalues
 #' sigma2.hat <- mean(as.vector(as.matrix(fit$var.error.new)))
-#' 
+#'
 #' p = 3
 #' optT.hat <- opt_design_fda(p=p, Phi=Phi.hat, lambda=lambda.hat, sigma2=sigma2.hat)
-#' 
-#' names(optT.hat) 
-#' # [1] "index_opt"      "obj_opt"        "obj_opt_limit"  "error.level"    "index_all_comb" "obj_eval_all"   "INPUT"         
-#' 
+#'
+#'
 #' # selected optimal sampling points
-#' optT.hat$index_opt  # [1]  5 14 18
-#' t.eq[optT.hat$index_opt]  #[1]  0.20 0.65 0.85
+#' optT.hat$index_opt  
+#' t.eq[optT.hat$index_opt]   
 #' # objective function evaluated with T0 = 21 grid of points (the best we can do)
-#' optT.hat$obj_opt_limit  #[1]  0.4435131
+#' optT.hat$obj_opt_limit  
 #' # prediction error with three optimal points
-#' optT.hat$obj_opt   # [1] 2.142494
-#' # error level with p = 3 
-#' optT.hat$obj_opt/optT.hat$obj_opt_limit; optT.hat$error.level # [1] 4.830735
-#' 
+#' optT.hat$obj_opt    
+#'
 #' # example of selection_p() function
-#' optT.hat.all <- selection_p(p_vec = c(1,3,4), threshold = 5, Phi=Phi.hat, lambda=lambda.hat, sigma2=sigma2.hat)
-#' optT.hat.all$p.sel #  [1] 3
-#' optT.hat.all$opt.sel[[1]]$index_opt  # [1]  5 14 18 (same as optT.hat$index_opt)
-#' 
-#' # example of interactive_plot() function
-#' optT.hat.first.three <- selection_p(p_vec = 1:3, threshold = 5, Phi=Phi.hat, lambda=lambda.hat, sigma2=sigma2.hat)
-#' interactive_plot(optT.hat.first.three)
-#' 
+#' optT.hat.all <- selection_p(delta = 0.1, B = diag(length(lambda.hat)), Phi=Phi.hat, lambda=lambda.hat, sigma2=sigma2.hat)
+#' optT.hat.all$p.sel  
+#' optT.hat.all$opt_result[[optT.hat.all$p.sel]]$index_opt
+#'
+#' interactive_plot(optT.hat.all)
+#'
 #' #===============================================================
 #' # Functional Linear Model (FLM) for fixed p = 3
 #' #===============================================================
@@ -122,59 +116,49 @@
 #' coef <- coef(fit1)
 #' beta.hat <- t(coef$value)%*% Phi.hat / T0
 #' beta.hat <- matrix(beta.hat, nrow=length(beta.hat))
-#' 
+#'
 #' optT.hat <- opt_design_fda(p=p, B = beta.hat%*%t(beta.hat),
-#'                            Phi=Phi.hat, lambda=lambda.hat, sigma2=sigma2.hat)
-#' 
+#'                           Phi=Phi.hat, lambda=lambda.hat, sigma2=sigma2.hat)
+#'
 #' # selected optimal sampling points
-#' optT.hat$index_opt  # [1]  4  5 15
-#' t.eq[optT.hat$index_opt]  # [1] 0.15 0.20 0.70
+#' optT.hat$index_opt   
+#' t.eq[optT.hat$index_opt]   
 #' # objective function evaluated with T0 = 21 grid of points (the best we can do)
-#' optT.hat$obj_opt_limit  # [1] 2.696117
+#' optT.hat$obj_opt_limit   
 #' # prediction error with three optimal points
-#' optT.hat$obj_opt   # [1] 7.350046
-#' # error level with p = 3 
-#' optT.hat$obj_opt/optT.hat$obj_opt_limit; optT.hat$error.level # [1] 2.72616
+#' optT.hat$obj_opt    
+#'
 #' # example of selection_p() function
-#' optT.hat.all <- selection_p(p_vec = c(1,3,4), threshold = 5, B = beta.hat%*%t(beta.hat),
-#'                          Phi=Phi.hat, lambda=lambda.hat, sigma2=sigma2.hat)
-#' optT.hat.all$p.sel #  [1] 3
-#' optT.hat.all$opt.sel[[1]]$index_opt  # [1]  4  5 15 (same as optT.hat$index_opt)
-#' 
-#' # example of interactive_plot() function
-#' optT.hat.first.three <- selection_p(p_vec = 1:3, threshold = 5, B = beta.hat%*%t(beta.hat),
-#'                                  Phi=Phi.hat, lambda=lambda.hat, sigma2=sigma2.hat)
-#' interactive_plot(optT.hat.first.three)
-#' 
+#' optT.hat.all <- selection_p(delta = 0.03, B = beta.hat%*%t(beta.hat),
+#'                            Phi=Phi.hat, lambda=lambda.hat, sigma2=sigma2.hat)
+#' optT.hat.all$p.sel  
+#' optT.hat.all$opt_result[[optT.hat.all$p.sel]]$index_opt
+#'
+#' interactive_plot(optT.hat.all)
+#'
 #' #===============================================================
 #' # Joint Optimal Design for fixed p = 3
 #' #===============================================================
 #' B <- diag(length(lambda.hat))/sum(lambda.hat)
 #' B <- B + beta.hat%*% t(beta.hat)/sum(lambda.hat*beta.hat^2)
-#' 
-#' optT.hat <- opt_fda_search(p=p, B = B,
-#'                            Phi=Phi.hat, lambda=lambda.hat, sigma2=sigma2.hat)
-#' 
+#'
+#' optT.hat <- opt_design_fda(p=p, B = B,
+#'                           Phi=Phi.hat, lambda=lambda.hat, sigma2=sigma2.hat)
+#'
 #' # selected optimal sampling points
-#' optT.hat$index_opt  # [1]  4 13 17
-#' t.eq[optT.hat$index_opt]  # [1] 0.15 0.60 0.80
+#' optT.hat$index_opt   
+#' t.eq[optT.hat$index_opt]   
 #' # objective function evaluated with T0 = 21 grid of points (the best we can do)
-#' optT.hat$obj_opt_limit  # [1] 0.08552796
+#' optT.hat$obj_opt_limit  
 #' # prediction error with three optimal points
-#' optT.hat$obj_opt   # [1] 0.3832871
-#' # error level with p = 3 
-#' optT.hat$obj_opt/optT.hat$obj_opt_limit; optT.hat$error.level # [1] 4.481425
-#' 
-#' # example of selection_p() function
-#' optT.hat.all <- selection_p(p_vec = c(1,3,4), threshold = 5, B = B,
-#'                          Phi=Phi.hat, lambda=lambda.hat, sigma2=sigma2.hat)
-#' optT.hat.all$p.sel #  [1] 3
-#' optT.hat.all$opt.sel[[1]]$index_opt  # [1]  4 13 17 (same as optT.hat$index_opt)
-#' 
+#' optT.hat$obj_opt    
+#'
 #' # example of interactive_plot() function
-#' optT.hat.first.three <- selection_p(p_vec = 1:3, threshold = 5, B = B,
-#'                                  Phi=Phi.hat, lambda=lambda.hat, sigma2=sigma2.hat)
+#' optT.hat.first.three <- selection_p(delta = 0.05, B = B,
+#'                                    Phi=Phi.hat, lambda=lambda.hat, sigma2=sigma2.hat)
 #' interactive_plot(optT.hat.first.three)
+#'
+#' # End(Not run)
 #' }
 #' @author So Young Park \email{spark13@@ncsu.edu},
 #' Luo Xiao \email{lxiao5@@ncsu.edu},

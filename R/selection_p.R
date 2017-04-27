@@ -1,10 +1,9 @@
 #' Optimal Sampling Design for Functional Data Analysis - selection of number of optimal points
 #'
-#' Selects number of optimal points, p, from a vector of p's (\code{p_vec}) given as input. 
-#' This function also returns results of the \link{opt_design_fda} function for given p's (\code{p_vec}).
+#' Selects number of optimal points, p. 
+#' This function also returns results of the \link{opt_design_fda} function for {p = 1, ..., p.sel+1}.
 #'
-#' @param p_vec   a vector of p's 
-#' @param threshold   user-specified threshold h for selecting p (relative error levels)
+#' @param delta   selection parameter 
 #' @param Phi   d by L matrix of eigenfunctions evaluated at d candidate points; L is number of PCs.
 #' @param lambda   eigenvalues; a vector of length L
 #' @param B   design criterion matrix (e.g. for recovering curves, B = diag(L); a square matrix with dim = L
@@ -25,37 +24,36 @@
 #' @import shiny
 #' @import ggplot2
 #' @export
-selection_p <- function(p_vec = 1:5, threshold = 5, Phi, lambda, B = NULL, sigma2 = 10^-14){
-  # p_vec=1:5; threshold = 5; Phi=Phi.hat; lambda=lambda.hat; sigma2=sigma2.hat; B = NULL
-
+selection_p <- function(delta = 0.1, pmax = 10, Phi, lambda, B = NULL, sigma2 = 10^-14){
+  
+  maxF <- sum(diag(B%*%diag(lambda)))
+  
   opt_result <- list()
-  for(j in 1:length(p_vec)){
-    p <- p_vec[j]
-    opt_result[[j]]<- opt_design_fda(p = p, Phi = Phi, lambda = lambda, B = B, sigma2 = sigma2)
+  lev <- c()
+  for(p in 1:pmax){
+    opt_result[[p]]<- opt_design_fda(p = p, Phi = Phi, lambda = lambda, B = B, sigma2 = sigma2)
+    lev[p] <- opt_result[[p]]$obj_opt/maxF  +delta*p
+    if(p > 1){
+      if((lev[p]-lev[p-1])>0 ) break
+    } 
+    
   }
-  plab <- c()
-  for(j in 1:(length(p_vec)-1)){
-    plab <- paste0(plab, paste0(p_vec[j], ", "))
-  }
-  plab <- paste0(plab, p_vec[length(p_vec)])
-  error_level_vec <- unlist(lapply(opt_result, function(a) a$error.level))
-  p.sel <- p_vec[which(error_level_vec < threshold)[1]]
+  p.sel <- p-1
   
-  plot1 <- plot(p_vec, error_level_vec, type="b", lwd=2, ylim = range(c(error_level_vec, threshold)),
+  ylim <- c(range(lev)[1] - diff(range(lev))*0.2, range(lev)[2] + diff(range(lev))*0.2)
+  plot1 <- plot(1:p, lev, type="b", lwd=2,
                 cex.lab = 1.5, cex.axis = 1.5, cex.main = 1.5,
-                main = paste0("Error Level for p = (", plab,")"),
-                xlab = "Number of Optimal Points (p)", ylab = "Error Level")
-  plot2 <- abline(h = threshold, col = "red", lty = 3)
+                main = paste0(""),ylim = ylim,
+                xlab = "Number of Optimal Points (p)", ylab = "Selection Criterion")
+  plot2 <- abline(h = lev[p.sel], col = "red", lty = 3)
+  plot3 <- points(p.sel, lev[p.sel], col = "red", pch = 16, cex = 1.5)
   
+  INPUT <- list(delta = delta, Phi=Phi,lambda=lambda, sigma2 = sigma2 , B = B)
   
-  INPUT <- list(p_vec = p_vec, Phi=Phi,lambda=lambda, sigma2 = sigma2 , B = B)
-  
-  return(list(plot1, plot2,
+  return(list(plot1, plot2, plot3,
               p.sel = p.sel,
-              opt.sel = opt_result[which(error_level_vec < threshold)[1]],
+              opt.sel = opt_result[[p.sel]],
               opt_result = opt_result,
               INPUT = INPUT))
 }
-# test <- select_p(p_vec=c(1,3,4), threshold = 5,
-#          Phi=Phi.hat, lambda=lambda.hat, sigma2=sigma2.hat, B = NULL)
-
+ 

@@ -56,7 +56,7 @@ interactive_plot <- function(result, labels_candidate_pts = NULL){
     ui = navbarPage( 
       title = h3("Optimal Design for Functional Data"), 
       windowTitle = "OptimalDesign", 
-      style = "font-size: 20px;line-height: 15px;  padding: 15px;",
+      #style = "font-size: 20px;line-height: 15px;  padding: 15px;",
       collapsible = FALSE, id = "nav",
       inverse = FALSE, header = NULL,
       fluid = TRUE,       
@@ -313,7 +313,7 @@ interactive_plot <- function(result, labels_candidate_pts = NULL){
                 axis.text.y = element_text(size=rel(1.5)),
                 axis.text.x = element_text(size=rel(2), angle = 90, hjust=1, vjust = 0),
                 plot.margin = unit(c(3, 0.1, 0.5, -2), "cm"),
-                panel.margin = unit(0,"cm"),
+                panel.spacing = unit(0,"cm"),
 
                 plot.title = element_text(size=30, margin = margin(20,20,20,20)))+
           geom_text(aes(label=lab), position=position_dodge(width=0.8), hjust= -0.05, size=8, angle = 90)
@@ -406,7 +406,7 @@ interactive_plot <- function(result, labels_candidate_pts = NULL){
           }
           a <- vec.choice[result_opt_index[[optNum]]]
           p <- p + annotate("text", fontface="bold", size=7,
-                            x = 6,
+                            x = length(vec.choice)-6,
                             y = 2*diff(range_y)/5,
                             na.rm = TRUE,
                             label = paste0('Optimal schedule = (',a[1],", ",a[2],")\nwith prediction error = ", round(result_opt_obj[[optNum]],digits=3)))
@@ -416,14 +416,14 @@ interactive_plot <- function(result, labels_candidate_pts = NULL){
             ind.second <- which(temp_$x2 == which( vec.choice ==as.numeric(input$p2_pt2)))
             temp__ <- temp_[ind.second,]
             p <- p + geom_point(data =  temp__, aes(x = x2 , y = y), colour = 'deepskyblue4', size = 5, shape = 17, na.rm=TRUE)
-            p <- p + annotate("text",size=7, colour = "deepskyblue4", x = 6,
+            p <- p + annotate("text",size=7, colour = "deepskyblue4", x = length(vec.choice)-6,
                               y = diff(range_y)/5, na.rm = TRUE,
                               label = paste0("User's choice = (", input$p2_pt1, ", ", input$p2_pt2, ")\nwith prediction error = ",
                                              round(min(temp__$y, na.rm=TRUE), digits=3)))
           }else{
             temp__1 <- data.frame(cbind(1:length(vec.choice), result_obj_eval[[1]])); colnames(temp__1) <- c("x1","y")
             p <- p + annotate("text",size=7, colour = "deepskyblue4", 
-                              x = 6,
+                              x = length(vec.choice)-6,
                               y = diff(range_y)/5, na.rm = TRUE,
                               label = paste0("User's choice = (", input$p2_pt1, ")\nwith prediction error = ",
                                              round( temp__1$y[which(vec.choice==input$p2_pt1)] , digits=3)))
@@ -488,7 +488,7 @@ interactive_plot <- function(result, labels_candidate_pts = NULL){
                 axis.text.y = element_text(size=rel(1.5)),
                 axis.text.x = element_text(size=rel(2), angle=90, hjust=1, vjust = 0),
                 plot.margin = unit(c(3, 0.1, 0.5, -2), "cm"),
-                panel.margin = unit(0,"cm"),
+                panel.spacing = unit(0,"cm"),
 
                 plot.title = element_text(size=30, margin = margin(20,20,20,20)))+
           geom_text(aes(label=lab), position=position_dodge(width=0.8), hjust= -0.05, size=8, angle = 90)
@@ -733,7 +733,7 @@ interactive_plot <- function(result, labels_candidate_pts = NULL){
                 axis.text.y = element_text(size=rel(1.5)),
                 axis.text.x = element_text(size=rel(2), angle=90, hjust=1, vjust = 0),
                 plot.margin = unit(c(4, 0.1, 0, -2), "cm"),
-                panel.margin = unit(0,"cm"),
+                panel.spacing = unit(0,"cm"),
 
                 plot.title = element_text(size=30, margin = margin(20,20,20,20)))+
           geom_text(aes(label=lab), position=position_dodge(width=0.8), hjust= -0.05, size=7, angle = 90)
@@ -763,3 +763,4 @@ interactive_plot <- function(result, labels_candidate_pts = NULL){
 #                    Phi=Phi.hat, lambda=lambda.hat, sigma2=sigma2.hat, B = NULL)
 # labels_candidate_pts = 1:nrow(Phi.hat) + 20
 # interactive_plot(result, labels_candidate_pts = labels_candidate_pts)
+
