@@ -4,7 +4,7 @@
 #' optimal sampling points for p = 1, 2, and 3.
 #' 
 #'
-#' @param result   list of results of \code{opt_design_fda} for p = 1, 2, 3; i.e. selection_p(p_vec = 1:3,...)
+#' @param result   list of results of \code{opt_design_fda} for p = 1, 2, 3
 #' @param labels_candidate_pts   candidate points for x-label on interactive plots; 
 #'        default = NULL is equivalent to 1:number of candidate points.
 #' 
