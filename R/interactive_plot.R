@@ -56,7 +56,7 @@ interactive_plot <- function(result, labels_candidate_pts = NULL){
     ui = navbarPage( 
       title = h3("Optimal Design for Functional Data"), 
       windowTitle = "OptimalDesign", 
-      style = "font-size: 20px;line-height: 15px;  padding: 15px;",
+      #style = "font-size: 20px;line-height: 15px;  padding: 15px;",
       collapsible = FALSE, id = "nav",
       inverse = FALSE, header = NULL,
       fluid = TRUE,       
@@ -313,7 +313,7 @@ interactive_plot <- function(result, labels_candidate_pts = NULL){
                 axis.text.y = element_text(size=rel(1.5)),
                 axis.text.x = element_text(size=rel(2), angle = 90, hjust=1, vjust = 0),
                 plot.margin = unit(c(3, 0.1, 0.5, -2), "cm"),
-                panel.margin = unit(0,"cm"),
+                panel.spacing = unit(0,"cm"),
 
                 plot.title = element_text(size=30, margin = margin(20,20,20,20)))+
           geom_text(aes(label=lab), position=position_dodge(width=0.8), hjust= -0.05, size=8, angle = 90)
@@ -488,7 +488,7 @@ interactive_plot <- function(result, labels_candidate_pts = NULL){
                 axis.text.y = element_text(size=rel(1.5)),
                 axis.text.x = element_text(size=rel(2), angle=90, hjust=1, vjust = 0),
                 plot.margin = unit(c(3, 0.1, 0.5, -2), "cm"),
-                panel.margin = unit(0,"cm"),
+                panel.spacing = unit(0,"cm"),
 
                 plot.title = element_text(size=30, margin = margin(20,20,20,20)))+
           geom_text(aes(label=lab), position=position_dodge(width=0.8), hjust= -0.05, size=8, angle = 90)
@@ -733,7 +733,7 @@ interactive_plot <- function(result, labels_candidate_pts = NULL){
                 axis.text.y = element_text(size=rel(1.5)),
                 axis.text.x = element_text(size=rel(2), angle=90, hjust=1, vjust = 0),
                 plot.margin = unit(c(4, 0.1, 0, -2), "cm"),
-                panel.margin = unit(0,"cm"),
+                panel.spacing = unit(0,"cm"),
 
                 plot.title = element_text(size=30, margin = margin(20,20,20,20)))+
           geom_text(aes(label=lab), position=position_dodge(width=0.8), hjust= -0.05, size=7, angle = 90)
